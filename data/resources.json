@@ -135,25 +135,6 @@
           "url": "https://pan.quark.cn/s/611c1703673d"
         }
       ]
-    },
-    {
-      "id": 5,
-      "title": "__TEST_AUTO_PUSH__",
-      "category": "??",
-      "tags": [],
-      "status": "已添加",
-      "description": "",
-      "updated_at": "2026-11-21",
-      "links": [],
-      "matched": true,
-      "folder_path": "manual://5",
-      "file_count": null,
-      "poster": null,
-      "year": null,
-      "rating": null,
-      "cast": [],
-      "parent": null,
-      "season": null
     }
   ]
 }
