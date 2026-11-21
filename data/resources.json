@@ -1,0 +1,159 @@
+{
+  "site": {
+    "name": "云盘影视资源站",
+    "slogan": "精选高清影视资源 · 一键转存",
+    "description": "本数据由夸克网盘同步（文件夹级）+ TMDB 自动刮削生成；未匹配资源可在站点手动匹配，发布前请人工核对。",
+    "notice": "资源版权归原作者所有，请勿用于商业用途。"
+  },
+  "categories": [
+    "电影",
+    "剧集",
+    "动漫",
+    "综艺",
+    "短剧",
+    "音乐"
+  ],
+  "resources": [
+    {
+      "id": 1,
+      "title": "布鲁伊 第1季",
+      "category": "剧集",
+      "tags": [
+        "剧集"
+      ],
+      "status": "已更新",
+      "description": "这部以趣味真挚的方式描绘现代家庭生活的动画片，赞扬了富有想象力的游戏是如何帮助孩子健康成长的。6岁的蓝色澳大利亚牧牛犬布鲁伊有着无穷无尽的想象力，热衷于将日常生活转变为调皮冒险。她和妹妹宾果致力于探索自己的世界，用游戏来克服她们的恐惧，并且尝试扮演成年人的角色。她们喜欢把父母（尤其是爸爸）拉进她们的游戏中。妈妈奇莉回归工作了，而爸爸班底特一边照顾孩子一边在家工作。虽然他可能以为自己能做主，但是女儿们绝对掌控了游戏时间——以及几乎所有其他的事情！",
+      "updated_at": "",
+      "matched": true,
+      "folder_path": "/媒体/布鲁伊/第一季",
+      "file_count": 52,
+      "parent": "布鲁伊",
+      "season": 1,
+      "poster": "https://image.tmdb.org/t/p/w500/svH4CnVdgiF7LpDCBjJZSKYPUl7.jpg",
+      "year": 2018,
+      "rating": 8.6,
+      "cast": [
+        "Dave McCormack",
+        "Melanie Zanetti"
+      ],
+      "links": [
+        {
+          "name": "夸克网盘",
+          "url": "https://pan.quark.cn/s/8f5c877855c9"
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "title": "布鲁伊 第2季",
+      "category": "剧集",
+      "tags": [
+        "剧集"
+      ],
+      "status": "已更新",
+      "description": "这部以趣味真挚的方式描绘现代家庭生活的动画片，赞扬了富有想象力的游戏是如何帮助孩子健康成长的。6岁的蓝色澳大利亚牧牛犬布鲁伊有着无穷无尽的想象力，热衷于将日常生活转变为调皮冒险。她和妹妹宾果致力于探索自己的世界，用游戏来克服她们的恐惧，并且尝试扮演成年人的角色。她们喜欢把父母（尤其是爸爸）拉进她们的游戏中。妈妈奇莉回归工作了，而爸爸班底特一边照顾孩子一边在家工作。虽然他可能以为自己能做主，但是女儿们绝对掌控了游戏时间——以及几乎所有其他的事情！",
+      "updated_at": "",
+      "matched": true,
+      "folder_path": "/媒体/布鲁伊/第二季",
+      "file_count": 52,
+      "parent": "布鲁伊",
+      "season": 2,
+      "poster": "https://image.tmdb.org/t/p/w500/svH4CnVdgiF7LpDCBjJZSKYPUl7.jpg",
+      "year": 2018,
+      "rating": 8.6,
+      "cast": [
+        "Dave McCormack",
+        "Melanie Zanetti"
+      ],
+      "links": [
+        {
+          "name": "夸克网盘",
+          "url": "https://pan.quark.cn/s/322ee57edac2"
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "title": "布鲁伊 第3季",
+      "category": "剧集",
+      "tags": [
+        "剧集"
+      ],
+      "status": "已更新",
+      "description": "这部以趣味真挚的方式描绘现代家庭生活的动画片，赞扬了富有想象力的游戏是如何帮助孩子健康成长的。6岁的蓝色澳大利亚牧牛犬布鲁伊有着无穷无尽的想象力，热衷于将日常生活转变为调皮冒险。她和妹妹宾果致力于探索自己的世界，用游戏来克服她们的恐惧，并且尝试扮演成年人的角色。她们喜欢把父母（尤其是爸爸）拉进她们的游戏中。妈妈奇莉回归工作了，而爸爸班底特一边照顾孩子一边在家工作。虽然他可能以为自己能做主，但是女儿们绝对掌控了游戏时间——以及几乎所有其他的事情！",
+      "updated_at": "",
+      "matched": true,
+      "folder_path": "/媒体/布鲁伊/第三季",
+      "file_count": 52,
+      "parent": "布鲁伊",
+      "season": 3,
+      "poster": "https://image.tmdb.org/t/p/w500/svH4CnVdgiF7LpDCBjJZSKYPUl7.jpg",
+      "year": 2018,
+      "rating": 8.6,
+      "cast": [
+        "Dave McCormack",
+        "Melanie Zanetti"
+      ],
+      "links": [
+        {
+          "name": "夸克网盘",
+          "url": "https://pan.quark.cn/s/1080932d5a7d"
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "title": "海洋奇缘",
+      "category": "电影",
+      "tags": [
+        "电影"
+      ],
+      "status": "已更新",
+      "description": "海的召唤，从未停止。熟悉的旋律响起，属于“莫阿娜”的冒险，再次扬帆启航。",
+      "updated_at": "",
+      "matched": true,
+      "folder_path": "/媒体/海洋奇缘",
+      "file_count": 1,
+      "parent": null,
+      "season": null,
+      "poster": "https://image.tmdb.org/t/p/w500/8f4OJJrMtZcoB4h1BLyyZewd96X.jpg",
+      "year": 2026,
+      "rating": 7.4,
+      "cast": [
+        "Catherine Lagaʻaia",
+        "道恩·强森",
+        "瑞娜·欧文",
+        "John Tui",
+        "弗兰基·亚当斯",
+        "杰梅奈·克莱门特",
+        "Emma Puahi-Shapazian",
+        "Amaya Masoli"
+      ],
+      "links": [
+        {
+          "name": "夸克网盘",
+          "url": "https://pan.quark.cn/s/611c1703673d"
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "title": "__TEST_AUTO_PUSH__",
+      "category": "??",
+      "tags": [],
+      "status": "已添加",
+      "description": "",
+      "updated_at": "2026-11-21",
+      "links": [],
+      "matched": true,
+      "folder_path": "manual://5",
+      "file_count": null,
+      "poster": null,
+      "year": null,
+      "rating": null,
+      "cast": [],
+      "parent": null,
+      "season": null
+    }
+  ]
+}

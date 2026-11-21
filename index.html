@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="云盘影视资源站 - 精选高清影视资源，一键转存网盘" />
+  <title>云盘影视资源站</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="container">
+      <div class="header-inner">
+        <a href="./" class="brand">
+          <span class="brand-logo">▶</span>
+          <span class="brand-text">
+            <span class="brand-name" id="siteName">云盘影视资源站</span>
+            <span class="brand-slogan" id="siteSlogan">精选高清影视资源 · 一键转存</span>
+          </span>
+        </a>
+        <button type="button" class="add-btn" id="addBtn" title="手动添加影片：创建一条新的资源记录">
+          <span class="add-icon" aria-hidden="true">＋</span>
+          <span>添加</span>
+        </button>
+        <button type="button" class="config-btn" id="configBtn" title="站点配置：TMDB Key / 夸克账号 / 分享鉴权头">
+          <span class="config-icon" aria-hidden="true">⚙</span>
+          <span>配置</span>
+        </button>
+        <button type="button" class="config-btn" id="qrBtn" title="扫码登录夸克：自动获取 Cookie 并捕获分享鉴权头">
+          <span class="config-icon" aria-hidden="true">▣</span>
+          <span>扫码</span>
+        </button>
+        <button type="button" class="refresh-btn" id="refreshBtn" title="一键刷新：同步网盘资源并重新刮削">
+          <span class="refresh-icon" aria-hidden="true">⟳</span>
+          <span id="refreshLabel">刷新</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main class="container main">
+    <section class="toolbar">
+      <div class="search-box">
+        <span class="search-icon" aria-hidden="true">⌕</span>
+        <input type="search" id="searchInput" placeholder="搜索资源名称 / 关键词…" autocomplete="off" />
+      </div>
+      <nav class="category-tabs" id="categoryTabs" aria-label="资源分类"></nav>
+    </section>
+
+    <section class="resource-grid" id="resourceGrid" aria-live="polite"></section>
+
+    <div class="empty-state" id="emptyState" hidden>
+      <p class="empty-title">没有找到相关资源</p>
+      <p class="empty-sub">换个关键词试试，或切换其他分类</p>
+    </div>
+  </main>
+
+  <!-- 添加 / 编辑资源统一面板 modal（合并原 手动匹配 / 编辑资源 / 手动添加影片 三个面板） -->
+  <div class="match-modal" id="resourceModal" hidden>
+    <div class="match-modal-backdrop" id="resourceModalBackdrop"></div>
+    <div class="match-modal-panel" role="dialog" aria-modal="true" aria-labelledby="resourceModalTitle">
+      <div class="match-modal-head">
+        <h3 class="match-modal-title" id="resourceModalTitle">添加资源</h3>
+        <button type="button" class="match-modal-close" id="resourceModalClose" aria-label="关闭">×</button>
+      </div>
+      <div class="match-modal-body">
+        <p class="match-modal-folder" id="resourceFolder"></p>
+        <div class="match-search-row">
+          <input type="text" id="resourceSearchTitle" placeholder="片名 / 剧名（搜索或直接作为标题）" autocomplete="off" />
+          <input type="number" id="resourceSearchYear" placeholder="年份（可选）" min="1900" max="2100" />
+          <button type="button" class="match-search-btn" id="resourceSearchBtn">搜索 TMDB</button>
+        </div>
+        <div class="match-results" id="resourceCandidates"></div>
+        <div class="edit-form">
+          <label class="edit-field"><span>标题</span><input type="text" id="resourceTitle" /></label>
+          <label class="edit-field"><span>分类</span><select id="resourceCategory"><option value="">请选择分类</option></select></label>
+          <label class="edit-field"><span>海报 URL</span><input type="text" id="resourcePoster" placeholder="https://…（可留空隐藏海报）" /></label>
+          <div class="edit-row">
+            <label class="edit-field"><span>年份</span><input type="number" id="resourceYear" min="1900" max="2100" /></label>
+            <label class="edit-field"><span>评分</span><input type="number" id="resourceRating" min="0" max="10" step="0.1" /></label>
+          </div>
+          <label class="edit-field"><span>简介</span><textarea id="resourceDesc" rows="3"></textarea></label>
+          <label class="edit-field"><span>演员（逗号分隔）</span><input type="text" id="resourceCast" placeholder="演员A, 演员B" /></label>
+          <label class="edit-field"><span>标签（逗号分隔）</span><input type="text" id="resourceTags" placeholder="高清, 4K, 国语" /></label>
+          <label class="edit-field"><span>夸克链接（每行：名称|URL）</span><textarea id="resourceLinks" rows="3" placeholder="夸克网盘|https://pan.quark.cn/s/xxx"></textarea></label>
+        </div>
+        <p class="match-modal-tip" id="resourceTip">搜索 TMDB 候选后点「选用」自动填充，字段可直接编辑；保存后写回 resources.json 并自动推送 GitHub Pages。</p>
+      </div>
+      <div class="match-modal-foot">
+        <button type="button" class="match-cancel-btn" id="resourceCancelBtn">取消</button>
+        <button type="button" class="match-apply-btn" id="resourceSaveBtn">保存</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 资源详情面板 modal：点击资源卡片打开 -->
+  <div class="match-modal" id="detailModal" hidden>
+    <div class="match-modal-backdrop" id="detailModalBackdrop"></div>
+    <div class="match-modal-panel detail-panel" role="dialog" aria-modal="true" aria-labelledby="detailModalTitle">
+      <div class="match-modal-head">
+        <h3 class="match-modal-title" id="detailModalTitle">资源详情</h3>
+        <button type="button" class="match-modal-close" id="detailModalClose" aria-label="关闭">×</button>
+      </div>
+      <div class="match-modal-body">
+        <div class="detail-layout">
+          <img class="detail-poster" id="detailPoster" alt="海报" />
+          <div class="detail-info">
+            <h4 class="detail-title" id="detailTitle"></h4>
+            <div class="detail-meta" id="detailMeta"></div>
+            <p class="detail-folder" id="detailFolder"></p>
+            <p class="detail-desc" id="detailDesc"></p>
+            <div class="detail-tags" id="detailTags"></div>
+            <div class="detail-links" id="detailLinks"></div>
+          </div>
+        </div>
+        <div class="detail-actions">
+          <button type="button" class="match-apply-btn" id="detailEditBtn">编辑</button>
+          <button type="button" class="match-apply-btn" id="detailMatchBtn">重新匹配</button>
+        </div>
+        <p class="match-modal-tip" id="detailTip"></p>
+      </div>
+    </div>
+  </div>
+
+  <!-- 站点配置面板 modal -->
+  <div class="match-modal" id="configModal" hidden>
+    <div class="match-modal-backdrop" id="configModalBackdrop"></div>
+    <div class="match-modal-panel" role="dialog" aria-modal="true" aria-labelledby="configModalTitle">
+      <div class="match-modal-head">
+        <h3 class="match-modal-title" id="configModalTitle">站点配置</h3>
+        <button type="button" class="match-modal-close" id="configModalClose" aria-label="关闭">×</button>
+      </div>
+      <div class="match-modal-body">
+        <label class="edit-field"><span>TMDB API Key</span><input type="text" id="configTmdbKey" placeholder="https://www.themoviedb.org 免费注册获取" /></label>
+        <label class="edit-field"><span>夸克网盘目录</span><input type="text" id="configQuarkDir" placeholder="/媒体" /></label>
+        <div class="config-accounts">
+          <div class="config-accounts-head"><span>夸克账号 Cookie 列表</span><button type="button" class="config-add-acc" id="configAddAccount">+ 添加账号</button></div>
+          <div id="configAccounts"></div>
+        </div>
+        <label class="edit-field"><span>分享鉴权头（JSON，创建夸克分享所需额外 header）</span><textarea id="configShareHeaders" rows="3" placeholder='{"X-Uc-Context-Token": "…", "sign": "…"}'></textarea></label>
+        <p class="match-modal-tip">多账号会依次尝试，任一有效 Cookie 即可拉取资源；分享鉴权头用于刷新时创建夸克分享链接，可从浏览器 DevTools 抓包获得；保存后请点「刷新」重新同步。</p>
+      </div>
+      <div class="match-modal-foot">
+        <button type="button" class="match-cancel-btn" id="configCancelBtn">取消</button>
+        <button type="button" class="match-apply-btn" id="configSaveBtn">保存配置</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 扫码登录夸克：自动获取 Cookie 与分享鉴权头 modal -->
+  <div class="match-modal" id="qrModal" hidden>
+    <div class="match-modal-backdrop" id="qrModalBackdrop"></div>
+    <div class="match-modal-panel" role="dialog" aria-modal="true" aria-labelledby="qrModalTitle">
+      <div class="match-modal-head">
+        <h3 class="match-modal-title" id="qrModalTitle">扫码登录夸克网盘</h3>
+        <button type="button" class="match-modal-close" id="qrModalClose" aria-label="关闭">×</button>
+      </div>
+      <div class="match-modal-body">
+        <p class="match-modal-tip">扫码登录后自动写回 config.json 的 Cookie；登录成功后在浏览器中任选一个文件夹点「分享」→ 创建链接，自动捕获鉴权头（X-Uc-Context-Token / sign 等）写回配置。</p>
+        <div class="qr-body">
+          <div class="qr-image-wrap" id="qrImageWrap">
+            <img id="qrImage" alt="登录二维码" />
+          </div>
+          <p class="qr-status" id="qrStatus">尚未开始。点击下方「开始扫码」会弹出浏览器窗口。</p>
+          <div class="qr-headers" id="qrHeaders" hidden></div>
+          <div class="qr-links" id="qrLinks" hidden></div>
+        </div>
+      </div>
+      <div class="match-modal-foot">
+        <button type="button" class="match-cancel-btn" id="qrCloseBtn">关闭</button>
+        <button type="button" class="match-cancel-btn" id="qrCancelBtn" hidden>结束会话</button>
+        <button type="button" class="match-cancel-btn" id="qrCaptureBtn" hidden>开始捕获</button>
+        <button type="button" class="match-apply-btn" id="qrStartBtn">开始扫码</button>
+      </div>
+    </div>
+  </div>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p class="footer-notice" id="siteNotice">资源版权归原作者所有，请勿用于商业用途。</p>
+      <p class="footer-copy">© 2026 云盘影视资源站 · Powered by GitHub Pages</p>
+    </div>
+  </footer>
+
+  <script src="js/app.js"></script>
+</body>
+</html>
